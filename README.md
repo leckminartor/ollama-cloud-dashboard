@@ -7,9 +7,7 @@
 
 A local web dashboard for your Ollama Cloud subscription: every current cloud model with peak & off-peak pricing, sortable by name or cost, plus **session usage** (5 h window) and **weekly usage** with reset countdowns.
 
-*by Klaus Perner*
-
-**By [Klaus Perner](https://github.com/leckminartor)** · [☕ Buy me a coffee](https://paypal.me/klausminator)
+*by [Klaus Perner](https://github.com/leckminartor) · [☕ Buy me a coffee](https://paypal.me/klausminator)*
 
 ## Features
 

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync dependencies
+        run: uv sync --locked
+
+      - name: Lint (ruff)
+        run: uv run ruff check .
+
+      - name: Smoke test (data pipeline against live sources)
+        run: |
+          uv run python - <<'PY'
+          import dashboard
+
+          rows = dashboard.build_models_payload(dashboard.get_http_client())
+          assert rows, "no model rows parsed"
+          print(f"models: {len(rows)}")
+
+          from pathlib import Path
+          cfg = dashboard.load_config()
+          assert not Path("config.json").exists(), "config.json must not be committed"
+          print("config hygiene OK")
+          PY
+
+      - name: Parse pricing (strict)
+        run: |
+          uv run python - <<'PY'
+          import httpx, dashboard
+
+          pricing = dashboard.fetch_pricing(httpx.Client(timeout=30, headers={"User-Agent": dashboard.USER_AGENT}))
+          assert pricing, "pricing table empty"
+          print(f"pricing rows: {len(pricing)}")
+          PY

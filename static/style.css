@@ -1,0 +1,170 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --panel2: #1d212b;
+  --border: #2a2f3c;
+  --text: #e6e9ef;
+  --muted: #8b93a5;
+  --accent: #4f8cff;
+  --ok: #3fb27f;
+  --warn: #e0a83f;
+  --bad: #e05b5b;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+
+.header-meta { display: flex; align-items: center; gap: 12px; }
+
+button {
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 7px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+button:hover { border-color: var(--accent); }
+button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.badge {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.hidden { display: none !important; }
+.error { color: var(--bad); font-size: 13px; margin-top: 8px; white-space: pre-wrap; }
+
+/* usage cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  padding: 18px 24px 0 24px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.card-title { font-weight: 600; margin-bottom: 10px; }
+.card-value { font-size: 22px; font-weight: 600; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.card-sub { margin-top: 4px; min-height: 16px; }
+
+.bar-wrap {
+  height: 8px;
+  background: var(--panel2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--ok);
+  transition: width 0.4s ease;
+}
+.bar.warn { background: var(--warn); }
+.bar.bad { background: var(--bad); }
+
+/* toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px 10px 24px;
+  flex-wrap: wrap;
+}
+.rate-toggle { display: inline-flex; }
+.rate-toggle button:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.rate-toggle button:last-child { border-radius: 0 var(--radius) var(--radius) 0; margin-left: -1px; }
+.rate-window { display: inline-flex; align-items: center; gap: 10px; }
+
+.badge.peak { color: var(--warn); border-color: var(--warn); }
+.badge.offpeak { color: var(--ok); border-color: var(--ok); }
+
+/* table */
+main { padding: 0 24px 24px 24px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+thead th {
+  text-align: left;
+  background: var(--panel2);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  white-space: nowrap;
+}
+thead th.sortable { cursor: pointer; }
+thead th.sortable:hover { color: var(--text); }
+thead th .arrow { margin-left: 5px; font-size: 10px; }
+th.num, td.num { text-align: right; }
+
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--panel2); }
+
+.tag-chip {
+  display: inline-block;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1px 8px;
+  margin: 1px 3px 1px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.model-name { font-weight: 600; }
+.variants-block { border-top: 1px dashed var(--border); }
+.variants-block td:first-child { padding-left: 34px; color: var(--muted); }
+
+footer { padding: 8px 24px 20px 24px; }

@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+config.json
+.mimocode/
+.playwright-cli/
+*.log
+.DS_Store

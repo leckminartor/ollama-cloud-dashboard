@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ollama Cloud Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦙</text></svg>">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Ollama Cloud Dashboard</h1>
+    <div class="header-meta">
+      <span class="badge">by Klaus Perner</span>
+      <span id="plan-badge" class="badge hidden"></span>
+      <span id="last-update" class="muted"></span>
+      <button id="refresh-btn" type="button">Jetzt aktualisieren</button>
+    </div>
+  </header>
+
+  <section id="usage-panel" class="cards">
+    <div class="card" id="card-session">
+      <div class="card-title">Session usage <span class="muted small">(5h-Fenster)</span></div>
+      <div class="bar-wrap"><div class="bar" id="bar-session"></div></div>
+      <div class="card-value" id="pct-session">–</div>
+      <div class="card-sub muted" id="reset-session"></div>
+    </div>
+    <div class="card" id="card-weekly">
+      <div class="card-title">Weekly usage <span class="muted small">(7-Tage-Fenster)</span></div>
+      <div class="bar-wrap"><div class="bar" id="bar-weekly"></div></div>
+      <div class="card-value" id="pct-weekly">–</div>
+      <div class="card-sub muted" id="reset-weekly"></div>
+    </div>
+    <div class="card source-card">
+      <div class="card-title">Datenquelle</div>
+      <div id="usage-source" class="card-sub">lädt…</div>
+      <div id="usage-error" class="error hidden"></div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="rate-toggle" role="group" aria-label="Preistyp">
+      <button type="button" id="rate-peak" class="active">Peak-Preise</button>
+      <button type="button" id="rate-offpeak">Off-Peak-Preise</button>
+    </div>
+    <div class="rate-window">
+      <span id="rate-window" class="badge">–</span>
+      <span id="rate-window-sub" class="muted small"></span>
+    </div>
+    <span id="rate-window-hint" class="muted small"></span>
+  </section>
+
+  <main>
+    <table id="models-table">
+      <thead>
+        <tr>
+          <th data-key="name" class="sortable">Modell</th>
+          <th data-key="tags" class="sortable">Varianten</th>
+          <th data-key="input" data-num="1" class="sortable num">Input $/1M</th>
+          <th data-key="cached" data-num="1" class="sortable num">Cached $/1M</th>
+          <th data-key="output" data-num="1" class="sortable num">Output $/1M</th>
+        </tr>
+      </thead>
+      <tbody id="models-body">
+        <tr><td colspan="5" class="muted">lädt…</td></tr>
+      </tbody>
+    </table>
+    <div id="models-error" class="error hidden"></div>
+  </main>
+
+  <footer class="muted small">
+    Quellen: ollama.com/api/tags · ollama.com/pricing · Usage: /api/usage (undokumentiert) oder ollama.com/settings (Cookie) ·
+    Ollama Cloud Dashboard v1.0.0 by Klaus Perner · <a href="https://paypal.me/klausminator" target="_blank" rel="noopener">Buy me a coffee</a>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
